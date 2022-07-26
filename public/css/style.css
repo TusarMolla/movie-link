@@ -1,0 +1,18 @@
+:root {
+    --offcanvas-width: 270px;
+    --topNavbarHeight: 76px;
+    --mcolor: yellow;
+}
+
+.sidebar-nav {
+    width: var(--offcanvas-width);
+}
+
+@media (min-width:992px) {
+    .offcanvas {
+        transform: none;
+        visibility: visible !important;
+        background-color: var(--mcolor);
+        data-bs-backdrop: false;
+    }
+}
