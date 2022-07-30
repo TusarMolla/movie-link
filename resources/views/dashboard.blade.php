@@ -8,7 +8,7 @@
     <a class="mt-5 p-5 btn bg-success  col-4 offset-4 card" href="{{url('/create-movie-link')}}">
         <h4 class="m-auto text-light fw-bold">Add Mivew Link</h4>
     </a>
-    <a class="mt-5 p-5 btn bg-info col-4 offset-4 card" href="#">
+    <a class="mt-5 p-5 btn bg-info col-4 offset-4 card" href="{{url('/movie-link-list')}}">
         <h4 class="m-auto text-light fw-bold">View Movie Link</h4>
     </a>
 

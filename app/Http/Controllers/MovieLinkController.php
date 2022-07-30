@@ -11,7 +11,9 @@ class MovieLinkController extends Controller
 {
 
     function index(){
-        return view("movie_list");
+        $movieLinks = Movie::all();
+
+        return view("movie_link_list",['links'=>$movieLinks]);
     }
 
     function create(){
@@ -19,6 +21,7 @@ class MovieLinkController extends Controller
 
         return view("add_movie_link",["categories"=>$categories]);
     }
+
     function store(Request $req){
         $movie = new Movie;
 
@@ -35,12 +38,50 @@ class MovieLinkController extends Controller
         $movie->release_date = $req->date;
         $movie->tranding = $req->isTranding;
 
-
-        Storage::disk('local')->put($fileName, $req->imagefile);
+        $req->image->move("public/images",$fileName);
 
         $movie->save();
 
         return redirect("dashboard");
     }
-    //
+
+    function edit($id){
+
+        $movie = Movie::where("id",$id)->first();
+        $categories = Category::all();
+
+        return view("edit_movie_link",["movie"=>$movie,"categories"=>$categories]);
+    }
+
+    function update(Request $req,$id){
+        $movie = Movie::where("id",$id)->first();
+
+
+
+        if($req->hasFile('image')){
+            $fileName = $req->image->getClientOriginalName();
+            $req->image->move("public/images",$fileName);
+            $movie->image = $fileName;
+        }
+
+
+
+        $movie->name = $req->name;
+        $movie->link = $req->url;
+        $movie->rating = $req->rating;
+        $movie->duration = $req->duration;
+        $movie->category_id = $req->category;
+        $movie->description = $req->description;
+        $movie->release_date = $req->date;
+        $movie->tranding = $req->isTranding;
+
+
+
+        $movie->save();
+
+        return redirect("dashboard");
+    }
+
+
+
 }
