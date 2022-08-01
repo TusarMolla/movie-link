@@ -25,18 +25,22 @@ Route::get('/', [HomeController::class,"index"]);
 
 Route::get('/login', [LoginController::class,"index"])->name("login");
 
+
 Route::post('/login-check', [LoginController::class,"login"]);
 Route::get('/registration',[RegistrationController::class,"index"]);
 Route::post('/user-store',[RegistrationController::class,"store"]);
+Route::get('/dashboard',[DashboardController::class,"index"])->middleware("auth");
 
 Route::get('/categorys',[CategoryController::class,"index"])->middleware("auth");
 Route::get('/create-category',[CategoryController::class,"newCategory"])->middleware("auth");
 Route::post('/category-store',[CategoryController::class,"store"])->middleware("auth");
-Route::get('/dashboard',[DashboardController::class,"index"])->middleware("auth");
+Route::get('/category-edit/{id}',[CategoryController::class,"edit"])->middleware("auth");
+Route::post('/category-update/{id}',[CategoryController::class,"update"])->middleware("auth");
+
 
 Route::get('/create-movie-link',[MovieLinkController::class,"create"])->middleware("auth");
 Route::get('/movie-link-list',[MovieLinkController::class,"index"])->middleware("auth");
 Route::post('/movie-link-store',[MovieLinkController::class,"store"])->middleware("auth");
 Route::get('/movie-link-edit/{id}',[MovieLinkController::class,"edit"])->middleware("auth");
-Route::get('/movie-link-update/{id}',[MovieLinkController::class,"update"])->middleware("auth");
+Route::post('/movie-link-update/{id}',[MovieLinkController::class,"update"])->middleware("auth");
 

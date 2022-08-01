@@ -54,6 +54,7 @@ class MovieLinkController extends Controller
     }
 
     function update(Request $req,$id){
+
         $movie = Movie::where("id",$id)->first();
 
 

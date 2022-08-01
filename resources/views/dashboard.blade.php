@@ -6,7 +6,7 @@
 <div >
 
     <a class="mt-5 p-5 btn bg-success  col-4 offset-4 card" href="{{url('/create-movie-link')}}">
-        <h4 class="m-auto text-light fw-bold">Add Mivew Link</h4>
+        <h4 class="m-auto text-light fw-bold">Add Movie Link</h4>
     </a>
     <a class="mt-5 p-5 btn bg-info col-4 offset-4 card" href="{{url('/movie-link-list')}}">
         <h4 class="m-auto text-light fw-bold">View Movie Link</h4>
@@ -17,7 +17,7 @@
     </a>
 
 
-    <a class="mt-5 p-5 btn bg-info col-4 offset-4 card" href="{{url('/category-list')}}">
+    <a class="mt-5 mb-5 p-5 btn bg-info col-4 offset-4 card" href="{{url('/categorys')}}">
         <h4 class="m-auto text-light fw-bold">View Categorys</h4>
     </a>
 

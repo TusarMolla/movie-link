@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
     function index(){
 
-        return view("category_list");
+        $categories = Category::all();
+
+        return view("category_list",["categories"=>$categories]);
     }
 
     function newCategory(){
@@ -22,14 +24,47 @@ class CategoryController extends Controller
 
         $category =new Category;
 
-        $fileName = $req->imagefile->getClientOriginalName();
+        $fileName = '';
 
-       Storage::disk('local')->put($fileName, $req->imagefile);
+        if($req->hasFile('imagefile')){
+            $fileName = $req->imagefile->getClientOriginalName();
+            $req->imagefile->move("public/images",$fileName);
+        }
 
         $category->name = $req->name;
         $category->image = $fileName;
         $category->save();
        return redirect("dashboard");
     }
+
+
+    function edit($id){
+        $category = Category::where("id",$id)->first();
+
+        return view('edit_category',["category"=>$category]);
+    }
+
+
+    function update(Request $req,$id){
+        $category = Category::where("id",$id)->first();
+
+
+
+        $fileName = $category->image;
+
+        if($req->hasFile('imagefile')){
+            $fileName = $req->imagefile->getClientOriginalName();
+            $req->imagefile->move("public/images",$fileName);
+        }
+
+        $category->name = $req->name;
+        $category->image=$fileName;
+
+        $category->save();
+
+        return redirect('dashboard');
+    }
+
+
 
 }

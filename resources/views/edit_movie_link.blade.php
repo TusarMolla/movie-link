@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-6 offset-3 card p-3 mt-5">
-        <form action="movie-link-update" method="POST" enctype="multipart/form-data">
+        <form action="{{url('movie-link-update/'.$movie->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
 
@@ -12,18 +12,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="mivieUrlId" class="form-label">Url</label>
-                    <input name="url" type="text" class="form-control" id="mivieUrlId" placeholder="Url">
+                    <input value="{{$movie->link}}" name="url" type="text" class="form-control" id="mivieUrlId" placeholder="Url">
                 </div>
 
                 <div class="mb-3">
                     <label for="disabledSelect" class="form-label">Category</label>
                     <select id="disabledSelect" class="form-select" name="category">
-                        <option>
-                            <h4 >Select</h4>
+                        <option selected>
+                            <h4>Select</h4>
                         </option>
 
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{$movie->category_id == $category->id ? selected : null }}>
+                        {{$movie->category_id == $category->id ?'yes': 'no' }}
+                            <option value="{{ $category->id }}" {{$movie->category_id == $category->id ? 'selected=selected':''}}>
                                 <h1>{{ $category->name }}</h1>
                             </option>
                         @endforeach
@@ -37,23 +38,23 @@
 
                 <div class="mb-3">
                     <label for="durationId" class="form-label">Duration</label>
-                    <input name="duration" type="text" class="form-control" id="durationId" placeholder="Duration">
+                    <input value="{{$movie->duration}}" name="duration" type="text" class="form-control" id="durationId" placeholder="Duration">
                 </div>
 
                 <div class="mb-3">
                     <label for="datenId" class="form-label">Release Date</label>
-                    <input name="date" type="text" class="form-control" id="dateId" placeholder="Release Date">
+                    <input value="{{$movie->release_date}}" name="date" type="text" class="form-control" id="dateId" placeholder="Release Date">
                 </div>
 
                 <label class="form-label">Tranding</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="isTranding" id="isTrandingYesID" value="1">
+                    <input class="form-check-input" type="radio" name="isTranding" id="isTrandingYesID" value="1" {{$movie->tranding ==1 ? 'checked=checked' :''}} >
                     <label class="form-check-label" for="isTrandingYesID">
                         Yes
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="isTranding" id="isTrandingNoID" value="0" checked>
+                    <input class="form-check-input" type="radio" name="isTranding" id="isTrandingNoID" value="0" {{$movie->tranding ==0 ? 'checked=checked' :''}}  >
                     <label class="form-check-label" for="isTrandingNoID">
                         NO
                     </label>
@@ -64,14 +65,14 @@
 
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$movie->description}}</textarea>
                 </div>
                 <label for="formFile" class="form-label">Select Image</label>
                 <input name="image" class="form-control" type="file" id="formFile">
             </div>
 
 
-            <button type="submit">Submit</button>
+            <button class="btn btn-success" type="submit">Submit</button>
 
 
 
