@@ -23,4 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/sliders",[MovieLinkController::class,"sliders"]);
 Route::get("/categories",[CategoryController::class,"index"]);
-Route::get("/movie-links",[MovieLinkController::class,"index"]);
+Route::get("/all-movies",[MovieLinkController::class,"index"]);
+Route::get("/movie-details",[MovieLinkController::class,"details"]);
+
+Route::get("/tranding-movies",[MovieLinkController::class,"tranding"]);
+Route::get("/tv-series",[MovieLinkController::class,"tvSeries"]);

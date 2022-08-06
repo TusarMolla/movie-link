@@ -1,11 +1,9 @@
 <?php
-namespace App\Helpers;
 
-
-class AppHelper
-{
-   static function publicAssets($image)
+if(!file_exists("publicAssets")){
+    function publicAssets($image)
     {
         return asset("public/" . $image);
     }
 }
+

@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Resources\Api;
-
-use AppHelpers;
-
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class MovieLinkCollection extends ResourceCollection
